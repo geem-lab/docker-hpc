@@ -2,8 +2,8 @@ FROM ubuntu:20.04
 LABEL maintainer="Felipe S. S. Schneider <schneider.felipe@posgrad.ufsc.br>"
 
 # --- Define arguments ---
-ARG URL=https://arquivos.ufsc.br/f/28c630798b094aff98c6/?dl=1
-ARG NAME=orca_4_2_1_linux_x86-64_shared_openmpi314
+ARG URL=https://arquivos.ufsc.br/f/3180610254f54f3a8ad5/?dl=1
+ARG NAME=orca_4_1_2_linux_x86-64_shared_openmpi313
 ARG PREFIX=/opt
 ARG USER=geem
 ARG DEBIAN_FRONTEND=noninteractive
