@@ -12,30 +12,34 @@ ARG DEBIAN_FRONTEND=noninteractive
 # --- Prepare system ---
 USER root
 WORKDIR $PREFIX
-RUN apt update --yes
-# RUN apt upgrade --yes
 
+RUN apt update && \
+#     apt upgrade --yes && \
+#
 # --- Obtain required libraries and utilities ---
-RUN apt install --yes openmpi-bin
-RUN apt install --yes vim
-
+    apt install --yes openmpi-bin && \
+    apt install --yes vim && \
+#
 # --- Obtain software ---
-RUN apt install --yes wget
-RUN wget $URL -O orca.tar.zst
-# RUN sha1sum orca.tar.zst
-
+    apt install --yes wget && \
+    wget $URL -O orca.tar.zst && \
+#     sha1sum orca.tar.zst && \
+#
 # --- Install binaries ---
-RUN apt install --yes zstd
-RUN tar -I zstd -xvf orca.tar.zst
-RUN mv $NAME orca
-RUN rm orca.tar.zst
-
+    apt install --yes zstd && \
+    tar -I zstd -xvf orca.tar.zst && \
+    mv $NAME orca && \
+    rm orca.tar.zst && \
+#
+# --- Clean up apt ---
+    rm -rf /var/lib/apt/lists/* && \
+#
 # --- Prepare running environment ---
-RUN useradd --create-home --shell /bin/bash $USER
-RUN echo export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$PREFIX/orca" >> /home/$USER/.bashrc
+    useradd --create-home --shell /bin/bash $USER && \
+    echo export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$PREFIX/orca" >> /home/$USER/.bashrc && \
 # See <http://mofem.eng.gla.ac.uk/mofem/html/faqs.html#openmpi_error_in_docer>:
-RUN echo export OMPI_MCA_btl_vader_single_copy_mechanism=none >> /home/$USER/.bashrc
+    echo export OMPI_MCA_btl_vader_single_copy_mechanism=none >> /home/$USER/.bashrc
 
 USER $USER
 WORKDIR /home/$USER
-CMD ["/bin/bash"]
+CMD ["tail", "-f", "/dev/null"]

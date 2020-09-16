@@ -12,32 +12,35 @@ ARG USER=geem
 # --- Prepare system ---
 USER root
 WORKDIR $PREFIX
-RUN apt update --yes
-# RUN apt upgrade --yes
-
+RUN apt update && \
+#     apt upgrade --yes && \
+#
 # --- Obtain required libraries and utilities ---
-# RUN apt install --yes openmpi-bin
-RUN apt install --yes vim
-
+#     apt install --yes openmpi-bin && \
+    apt install --yes vim && \
+#
 # --- Obtain software ---
-RUN apt install --yes wget
-RUN wget $URL -O Miniconda3.sh
-# RUN sha256sum Miniconda3.sh
+    apt install --yes wget && \
+    wget $URL -O Miniconda3.sh && \
+#     sha256sum Miniconda3.sh && \
 # See <https://stackoverflow.com/a/58269633/4039050>:
-RUN bash Miniconda3.sh -b -p $PREFIX/miniconda
-RUN rm Miniconda3.sh
-
+    bash Miniconda3.sh -b -p $PREFIX/miniconda && \
+    rm Miniconda3.sh && \
+#
+# --- Clean up apt ---
+    rm -rf /var/lib/apt/lists/* && \
+#
 # --- Install binaries ---
-RUN PATH="$PATH:$PREFIX/miniconda/bin" conda install -c conda-forge/label/$NAME siesta
+    PATH="$PATH:$PREFIX/miniconda/bin" conda install -c conda-forge/label/$NAME siesta && \
 # Both lines below are ugly but just work:
-RUN ln -s $PREFIX/miniconda/lib/libhdf5.so $PREFIX/miniconda/lib/libhdf5.so.101
-RUN ln -s $PREFIX/miniconda/lib/libnetcdf.so $PREFIX/miniconda/lib/libnetcdf.so.13
-
+    ln -s $PREFIX/miniconda/lib/libhdf5.so $PREFIX/miniconda/lib/libhdf5.so.101 && \
+    ln -s $PREFIX/miniconda/lib/libnetcdf.so $PREFIX/miniconda/lib/libnetcdf.so.13 && \
+#
 # --- Prepare running environment ---
-RUN useradd --create-home --shell /bin/bash $USER
-RUN echo export PATH="$PATH:$PREFIX/miniconda/bin" >> /home/$USER/.bashrc
-# RUN echo export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$PREFIX/miniconda/lib" >> /home/$USER/.bashrc
+    useradd --create-home --shell /bin/bash $USER && \
+    echo export PATH="$PATH:$PREFIX/miniconda/bin" >> /home/$USER/.bashrc
+#     echo export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$PREFIX/miniconda/lib" >> /home/$USER/.bashrc
 
 USER $USER
 WORKDIR /home/$USER
-CMD ["/bin/bash"]
+CMD ["tail", "-f", "/dev/null"]

@@ -15,7 +15,7 @@ All images are available in
 [Docker Hub under @schneiderfelipe](https://hub.docker.com/u/schneiderfelipe),
 so the command below does everything for you:
 
-    $ docker run -it schneiderfelipe/siesta:4.0.2
+    $ docker run -it schneiderfelipe/siesta:4.0.2 bash
 
 This will give you a minimal, fully functioning terminal with all required
 software available at `/opt`.
