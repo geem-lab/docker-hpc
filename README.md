@@ -15,7 +15,7 @@ All images are available in
 [Docker Hub under @schneiderfelipe](https://hub.docker.com/u/schneiderfelipe),
 so the command below does everything for you:
 
-    $ docker run -it schneiderfelipe/orca:4.2.1
+    $ docker run -it schneiderfelipe/siesta:4.0.2
 
 This will give you a minimal, fully functioning terminal with all required
 software available at `/opt`.
@@ -26,7 +26,7 @@ software available at `/opt`.
 
 ## How to build images locally
 
-    $ docker build -t orca:4.2.1 orca:4.2.1
+    $ docker build -t siesta:4.0.2 siesta:4.0.2
 
 ## Useful technical references
 
