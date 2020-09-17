@@ -3,7 +3,7 @@ LABEL maintainer="Felipe S. S. Schneider <schneider.felipe@posgrad.ufsc.br>"
 
 # --- Define arguments ---
 ARG URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-ARG NAME=cf202003
+ARG NAME="4.0.2=mpi_openmpi_h32a33b9_6"
 ARG PREFIX=/opt
 ARG USER=geem
 # ARG DEBIAN_FRONTEND=noninteractive
@@ -16,7 +16,7 @@ RUN apt update && \
 #     apt upgrade --yes && \
 #
 # --- Obtain required libraries and utilities ---
-#     apt install --yes openmpi-bin && \
+    apt install --yes openssh-client && \
     apt install --yes vim && \
 #
 # --- Obtain software ---
@@ -31,7 +31,7 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/* && \
 #
 # --- Install binaries ---
-    PATH="$PATH:$PREFIX/miniconda/bin" conda install -c conda-forge/label/$NAME siesta && \
+    PATH="$PATH:$PREFIX/miniconda/bin" conda install -c conda-forge siesta=$NAME && \
 # Both lines below are ugly but just work:
     ln -s $PREFIX/miniconda/lib/libhdf5.so $PREFIX/miniconda/lib/libhdf5.so.101 && \
     ln -s $PREFIX/miniconda/lib/libnetcdf.so $PREFIX/miniconda/lib/libnetcdf.so.13 && \
