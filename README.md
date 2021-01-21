@@ -17,12 +17,13 @@ so the command below does everything for you:
 
     $ docker run -it schneiderfelipe/siesta:4.0.2 bash
 
+(Of course, you'll need [Docker](https://www.docker.com/).)
 This will give you a minimal, fully functioning terminal with all required
-software available at `/opt`.
+software available in `/opt`.
 
 *Note*: if you build images locally
 ([see below](#how-to-build-images-locally)), you probably want to remove the
-`schneiderfelipe/` part.
+`schneiderfelipe/` part (see below).
 
 ## How to build images locally
 
