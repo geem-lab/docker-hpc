@@ -37,7 +37,7 @@ RUN wget $URL -O orca.tar.zst && \
     useradd --create-home --shell /bin/bash $USER && \
     echo 'export PATH=$PREFIX/orca:$PATH; export LD_LIBRARY_PATH=$PREFIX/orca:$LD_LIBRARY_PATH' >> /home/$USER/.bashrc && \
     echo 'export PATH=$PREFIX/orca/openmpi-4.1.1/bin:$PATH; export LD_LIBRARY_PATH=$PREFIX/orca/openmpi-4.1.1/lib:$LD_LIBRARY_PATH' >> /home/$USER/.bashrc && \
-   /bin/bash -c "source /home/$USER/.bashrc"
+    /bin/bash -c "source /home/$USER/.bashrc"
 USER $USER
 WORKDIR /home/$USER
 CMD ["tail", "-f", "/dev/null"]
