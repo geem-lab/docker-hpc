@@ -20,9 +20,8 @@ jobs:
                     if [ -d "$d" ]; then
                         cd "$d"
                         program=$(echo "$d" | cut -d: -f 1)
-                        if grep -Fxq "$program" "$built"; then
-                            # Already latest version already built
-                        else
+                        if ! grep -Fxq "$program" "$built"; then
+                            # No version built yet
                             if [ -f Dockerfile ]; then
                                 # The directory name *is* the tag and version
                                 docker build . --file Dockerfile --tag "$d"
