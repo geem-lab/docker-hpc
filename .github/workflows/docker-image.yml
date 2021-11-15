@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Build all Docker images
+              run: |
+                rootdir="$(pwd)"
+                for d in $(ls); do
+                    if [ -d "$d" ]; then
+                        cd "$d"
+                        if [ -f Dockerfile ]; then
+                            # The directory name *is* the tag and version
+                            docker build . --file Dockerfile --tag "$d"
+                        fi
+                        cd "$rootdir"
+                    fi
+                done
