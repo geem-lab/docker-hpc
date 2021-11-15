@@ -14,7 +14,7 @@ jobs:
             - name: Build all Docker images
               run: |
                 rootdir="$(pwd)"
-                for d in $(ls); do
+                for d in $(ls | sort -h -r); do
                     if [ -d "$d" ]; then
                         cd "$d"
                         if [ -f Dockerfile ]; then
