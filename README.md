@@ -1,3 +1,5 @@
+[![Docker Images CI](https://github.com/geem-lab/docker-hpc/actions/workflows/docker-image.yml/badge.svg)](https://github.com/geem-lab/docker-hpc/actions/workflows/docker-image.yml)
+
 # Dockerfiles for Computational Chemistry
 
 This is a repository of Dockerfiles for software commonly used in
