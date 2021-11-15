@@ -23,7 +23,7 @@ RUN wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.g
     tar xvf openmpi-4.1.1.tar.gz && \
     rm openmpi-4.1.1.tar.gz
 WORKDIR openmpi-4.1.1
-RUN ./configure --prefix=/opt/orca-5.0.0/openmpi-4.1.1 && \
+RUN ./configure --prefix=/opt/orca/openmpi-4.1.1 && \
     make all && \
     make install
 # orca-5.0.1 installation
