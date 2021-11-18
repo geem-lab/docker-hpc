@@ -22,6 +22,8 @@ jobs:
             - name: Build all Docker images
               run: |
                 rootdir="$(pwd)"
+                built="$rootdir/done.txt"
+                touch "$built"
                 for d in $(ls | sort -h -r); do
                     if [ -d "$d" ]; then
                         cd "$d"
@@ -33,7 +35,8 @@ jobs:
                                 docker build --tag ghcr.io/${{ steps.repo-owner.outputs.repo-owner }}/$d .
                                 docker push ghcr.io/${{ steps.repo-owner.outputs.repo-owner }}/$d
                             fi
+                            echo "$program" >> "$built"
                         fi
+                        cd "$rootdir"
                     fi
                 done
-
